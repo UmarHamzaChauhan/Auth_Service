@@ -33,6 +33,25 @@ class userService {
     return newJWT; 
 
   }
+  async isAuthenticated(token) {
+    try { 
+       const response = this.verifyToken(token);
+       console.log(response);
+       if(!response) {
+        throw {error:'Not verified'}
+       }
+       const user = await this.userRepository.getById(response.user.id);
+       console.log(user);
+       if(!user) {
+        throw {error:'Invalid User with Token'}
+       }
+       return user.id; 
+    }
+    catch(error) {
+      console.log('unable to authenticate token');
+      throw error;
+    }
+  }
   createToken(user) {
     try {
       const result = jwt.sign({user},JWT_KEY,{expiresIn:'24h'});
