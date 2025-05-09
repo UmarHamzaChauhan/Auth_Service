@@ -21,10 +21,6 @@ class userService {
   }
   async signIn(email,plainPassword) {
     const user = await this.userRepository.getByEmail(email); {
-
-      if(!user) {
-        throw {error :'inavlid email'};
-      }
     }
     const passMatch = this.checkPassword(plainPassword,user.password);
 
