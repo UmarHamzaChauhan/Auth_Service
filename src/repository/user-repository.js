@@ -1,4 +1,4 @@
-const { User } = require ('../models/index');
+const { User,Role } = require ('../models/index');
 
 
 class userRepository { 
@@ -56,15 +56,17 @@ class userRepository {
   async isAdmin(userId) {
     try {
       const user =await User.findByPk(userId);
+      console.log('user is',user);
       const adminRole = await Role.findOne({
         where: {
          name:'ADMIN'
         }
       });
-      return user.hasRole(adminRole);
+      console.log('adminRole is',adminRole);
+      return await user.hasRole(adminRole);
     }
     catch(error) {
-      console.log('Error in finding AdminRole');
+      console.log('Error in finding AdminRole',error);
       throw error;
     }
   }

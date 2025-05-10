@@ -83,7 +83,7 @@ class userService {
   }
   async isAdmin(userId) {
     try {
-      return this.userRepository.isAdmin(userId);
+      return await this.userRepository.isAdmin(userId);
     }
     catch(error) {
       console.log('error in checking if Admin');

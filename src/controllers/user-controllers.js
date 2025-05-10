@@ -67,8 +67,8 @@ class UserController {
 
   async isAdmin(req, res) {
     try {
-      const response = await userService.isAdmin(req.body.userId);
-     // console.log('response is :',response);
+      const response = await userService.isAdmin(req.body.id);
+      console.log('response is :',response);
       return res.status(200).json({
         success: true,
         message: 'Yes, is Admin',
